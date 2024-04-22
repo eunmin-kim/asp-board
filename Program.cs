@@ -1,3 +1,5 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace AspCoreBoardProject;
 
 public class Program
@@ -5,6 +7,11 @@ public class Program
     public static void Main(string[] args)
     {
         var builder = WebApplication.CreateBuilder(args);
+
+        builder.Services.AddDbContext<DbContext>(options => options.UseMySql(
+            builder.Configuration.GetConnectionString("MariaDB"),
+            ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDB"))
+        ));
 
         // Add services to the container.
         builder.Services.AddControllersWithViews();
