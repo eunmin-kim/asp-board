@@ -1,3 +1,4 @@
+using AspCoreBoardProject.DataContext;
 using Microsoft.EntityFrameworkCore;
 
 namespace AspCoreBoardProject;
@@ -8,7 +9,7 @@ public class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        builder.Services.AddDbContext<DbContext>(options => options.UseMySql(
+        builder.Services.AddDbContext<BoardDbContext>(options => options.UseMySql(
             builder.Configuration.GetConnectionString("MariaDB"),
             ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("MariaDB"))
         ));
